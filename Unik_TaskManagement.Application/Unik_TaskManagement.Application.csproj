@@ -6,4 +6,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Contracts\SendEmail\" />
+    <Folder Include="Features\" />
+    <Folder Include="Mapping\" />
+  </ItemGroup>
+
+  <ItemGroup>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Unik_TaskManagement.Domain\Unik_TaskManagement.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
