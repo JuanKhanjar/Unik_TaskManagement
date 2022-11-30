@@ -27,5 +27,8 @@ namespace Unik_TaskManagement.Domain
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
         public IReadOnlyCollection<Project>? KundeProjects { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

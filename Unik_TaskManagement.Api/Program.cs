@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Unik_TaskManagement.Application.Contracts.Persistence;
+using Unik_TaskManagement.Application;
+using Unik_TaskManagement.Persistence;
 using Unik_TaskManagement.Persistence.Data;
-using Unik_TaskManagement.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +15,9 @@ builder.Services.AddSwaggerGen( );
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
         builder.Configuration.GetConnectionString("MyConnectionString")
     ));
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>( );
+//builder.Services.AddScoped<IUnitOfWork, UnitOfWork>( );
+builder.Services.AddApplicationServices( );
+builder.Services.AddPersistenceServices( );
 
 var app = builder.Build( );
 

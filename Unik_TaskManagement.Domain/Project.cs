@@ -15,7 +15,6 @@ namespace Unik_TaskManagement.Domain
 
         [Required,MaxLength(100,ErrorMessage ="Project Name Sohuld Be In The Range 3 -100 ")]
         public string ProjectTitle { get; set; }
-        public bool IsActive { get; set; } = true;
         public Guid KundeId { get; set; }
 
         [ForeignKey("KundeId")]

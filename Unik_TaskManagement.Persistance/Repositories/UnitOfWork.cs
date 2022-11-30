@@ -14,11 +14,27 @@ namespace Unik_TaskManagement.Persistence.Repositories
     {
         public IKundeRepository Kunde { get; private set; }
 
+        public IProjectRepository Project { get; private set; }
+
+        public IOpgaveRepository Opgave { get; private set; }
+
+        public IMedarbejdeRepository Medarbejde { get; private set; }
+
+        public ISkillRepository Skill { get; private set; }
+
+        public IBookingRepository Booking { get; private set; }
+        
+
         private readonly ApplicationDbContext _db;
         public UnitOfWork ( ApplicationDbContext db )
         {
             _db = db;
             Kunde = new KundeRepository(_db);
+            Project = new ProjectRepository(_db);
+            Opgave = new OpgaveRepository(_db);
+            Medarbejde = new MedarbejdeRepository(_db);
+            Skill = new SkillRepository(_db);
+
         }
 
         public void Dispose ( )
