@@ -25,6 +25,7 @@ namespace Unik_TaskManagement.Persistence.Repositories
             if (objFromDb != null)
             {
                 objFromDb.ProjectTitle = project.ProjectTitle;
+                objFromDb.Location= project.Location;
             }
         }
     }

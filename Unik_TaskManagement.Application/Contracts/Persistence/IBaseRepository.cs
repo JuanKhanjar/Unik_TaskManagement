@@ -10,8 +10,8 @@ namespace Unik_TaskManagement.Application.Contracts.Persistence
     public interface IBaseRepository<T> where T : class
     {
         //GET ALL, GET By ID FIRST OR DEFAULT, ADD, REMOVE, REMOVERANGE
-        Task<List<T>> GetAllDataAsync ( Expression<Func<T, bool>>? filter = null, string? includeProperties = null );
-        Task<T> GetByIdAsync ( Expression<Func<T, bool>>? filter = null, string? includeProperties = null );
+        Task<IEnumerable<T>> GetAllDataAsync ( Expression<Func<T, bool>>? filter = null, string[]? includeProperties = null );
+        Task<T> GetByIdAsync ( Expression<Func<T, bool>> filter , string? includeProperties = null );
         Task CreateAsync ( T entity );
         void Delete ( T entity );
     }

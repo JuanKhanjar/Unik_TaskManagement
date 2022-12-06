@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Contracts\SendEmail\" />
-    <Folder Include="Features\Stamdata\Bookings\Commands\AddNew\" />
     <Folder Include="Features\Stamdata\Bookings\Commands\Delete\" />
     <Folder Include="Features\Stamdata\Bookings\Commands\Update\" />
     <Folder Include="Features\Stamdata\Bookings\Queries\GetAll\" />
@@ -16,24 +15,20 @@
     <Folder Include="Features\Stamdata\Medarbejder\Commands\AddNew\" />
     <Folder Include="Features\Stamdata\Medarbejder\Commands\Delete\" />
     <Folder Include="Features\Stamdata\Medarbejder\Commands\Update\" />
-    <Folder Include="Features\Stamdata\Medarbejder\Queries\GetAll\" />
     <Folder Include="Features\Stamdata\Medarbejder\Queries\GetDetails\" />
     <Folder Include="Features\Stamdata\Opgaver\Commands\AddNew\" />
     <Folder Include="Features\Stamdata\Opgaver\Commands\Delete\" />
     <Folder Include="Features\Stamdata\Opgaver\Commands\Update\" />
-    <Folder Include="Features\Stamdata\Opgaver\Queries\GetAll\" />
     <Folder Include="Features\Stamdata\Opgaver\Queries\GetDetails\" />
     <Folder Include="Features\Stamdata\Projects\Commands\AddNew\" />
     <Folder Include="Features\Stamdata\Projects\Commands\Delete\" />
     <Folder Include="Features\Stamdata\Projects\Commands\Update\" />
-    <Folder Include="Features\Stamdata\Projects\Queries\GetAll\" />
-    <Folder Include="Features\Stamdata\Projects\Queries\GetDetails\" />
+    <Folder Include="Features\Stamdata\Projects\ProjectsDtos\" />
     <Folder Include="Features\Stamdata\Skills\Commands\AddNew\" />
     <Folder Include="Features\Stamdata\Skills\Commands\Delete\" />
     <Folder Include="Features\Stamdata\Skills\Commands\Update\" />
     <Folder Include="Features\Stamdata\Skills\Queries\GetAll\" />
     <Folder Include="Features\Stamdata\Skills\Queries\GetDetails\" />
-    <Folder Include="Mapping\" />
   </ItemGroup>
 
   <ItemGroup>

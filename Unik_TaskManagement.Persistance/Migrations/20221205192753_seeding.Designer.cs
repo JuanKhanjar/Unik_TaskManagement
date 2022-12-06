@@ -12,8 +12,8 @@ using Unik_TaskManagement.Persistence.Data;
 namespace UnikTaskManagement.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221127213524_IntialDb")]
-    partial class IntialDb
+    [Migration("20221205192753_seeding")]
+    partial class seeding
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,8 +31,8 @@ namespace UnikTaskManagement.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Duration")
-                        .HasColumnType("float");
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -78,9 +78,31 @@ namespace UnikTaskManagement.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
                     b.HasKey("KundeId");
 
                     b.ToTable("Kunder");
+
+                    b.HasData(
+                        new
+                        {
+                            KundeId = new Guid("2d56c6f9-da4d-4907-9c1a-634de7e7281e"),
+                            Email = "aabv@gmail.com",
+                            FullName = "AAb Vejle",
+                            Phone = "82838435"
+                        },
+                        new
+                        {
+                            KundeId = new Guid("344e120b-12fc-4ded-8f45-52d60604460c"),
+                            Email = "lejerbo@gmail.com",
+                            FullName = "Lejer Bo Vejle",
+                            Phone = "82838444"
+                        });
                 });
 
             modelBuilder.Entity("Unik_TaskManagement.Domain.Medarbejde", b =>
@@ -111,6 +133,35 @@ namespace UnikTaskManagement.Persistence.Migrations
                     b.HasKey("MedarbejdeId");
 
                     b.ToTable("Medarbejder");
+
+                    b.HasData(
+                        new
+                        {
+                            MedarbejdeId = new Guid("580c5ae7-5eaa-4918-bbea-9e5a53124699"),
+                            Email = "med1@gmail.com",
+                            FirstName = "med1",
+                            Job = 0,
+                            LastName = "med1L",
+                            Phone = "12345678"
+                        },
+                        new
+                        {
+                            MedarbejdeId = new Guid("970ad7e2-c5a8-441b-bd34-f9e68cbe11d2"),
+                            Email = "med2@gmail.com",
+                            FirstName = "med1",
+                            Job = 0,
+                            LastName = "med2L",
+                            Phone = "12345679"
+                        },
+                        new
+                        {
+                            MedarbejdeId = new Guid("0104f406-58a9-457a-af8c-e0712c8577b5"),
+                            Email = "med3@gmail.com",
+                            FirstName = "med3",
+                            Job = 1,
+                            LastName = "med3L",
+                            Phone = "12345630"
+                        });
                 });
 
             modelBuilder.Entity("Unik_TaskManagement.Domain.Opgave", b =>
@@ -123,9 +174,6 @@ namespace UnikTaskManagement.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ProjectId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -133,9 +181,33 @@ namespace UnikTaskManagement.Persistence.Migrations
 
                     b.HasKey("OpgaveId");
 
-                    b.HasIndex("ProjectId");
-
                     b.ToTable("Opgaver");
+
+                    b.HasData(
+                        new
+                        {
+                            OpgaveId = new Guid("08fc43ea-0283-4371-900e-e22028bb721e"),
+                            Description = "",
+                            Title = " Installing Sql Server"
+                        },
+                        new
+                        {
+                            OpgaveId = new Guid("3b6db15f-0120-4b6c-bb54-dff6b0faf466"),
+                            Description = "",
+                            Title = "Make Database net working"
+                        },
+                        new
+                        {
+                            OpgaveId = new Guid("f6b0b0d5-b5dc-4677-bd45-cbd4c6925401"),
+                            Description = "",
+                            Title = "Programming "
+                        },
+                        new
+                        {
+                            OpgaveId = new Guid("04b8af31-28b6-4b14-91d1-f5c7f62f4496"),
+                            Description = "",
+                            Title = "testing systems"
+                        });
                 });
 
             modelBuilder.Entity("Unik_TaskManagement.Domain.Project", b =>
@@ -144,11 +216,13 @@ namespace UnikTaskManagement.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<Guid>("KundeId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ProjectTitle")
                         .IsRequired()
@@ -160,6 +234,29 @@ namespace UnikTaskManagement.Persistence.Migrations
                     b.HasIndex("KundeId");
 
                     b.ToTable("Projects");
+
+                    b.HasData(
+                        new
+                        {
+                            ProjectId = new Guid("ddb63550-022c-4d35-88d6-c3ab0b3d1d1f"),
+                            KundeId = new Guid("2d56c6f9-da4d-4907-9c1a-634de7e7281e"),
+                            Location = "Vejle",
+                            ProjectTitle = "Pt1"
+                        },
+                        new
+                        {
+                            ProjectId = new Guid("344c5b73-5d01-4ece-8d34-b10ba6daaa19"),
+                            KundeId = new Guid("2d56c6f9-da4d-4907-9c1a-634de7e7281e"),
+                            Location = "Kolding",
+                            ProjectTitle = "Pt2"
+                        },
+                        new
+                        {
+                            ProjectId = new Guid("6024788a-8bce-4c7d-ae34-2beafbf0a2d2"),
+                            KundeId = new Guid("344e120b-12fc-4ded-8f45-52d60604460c"),
+                            Location = "Herning",
+                            ProjectTitle = "Pt3"
+                        });
                 });
 
             modelBuilder.Entity("Unik_TaskManagement.Domain.Skill", b =>
@@ -169,12 +266,14 @@ namespace UnikTaskManagement.Persistence.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("MedarbejdeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SkillTitle")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SkillId");
@@ -182,6 +281,32 @@ namespace UnikTaskManagement.Persistence.Migrations
                     b.HasIndex("MedarbejdeId");
 
                     b.ToTable("Skills");
+
+                    b.HasData(
+                        new
+                        {
+                            SkillId = new Guid("65384c2c-9000-435a-bd94-abadc2d5107e"),
+                            Description = "some des.",
+                            SkillTitle = "Sql Server"
+                        },
+                        new
+                        {
+                            SkillId = new Guid("97ce53b1-f23a-4930-b4bf-67e419949ae1"),
+                            Description = "some des.",
+                            SkillTitle = "Programming"
+                        },
+                        new
+                        {
+                            SkillId = new Guid("a29731a6-c039-4a3d-898f-bd6236a4a101"),
+                            Description = "some des.",
+                            SkillTitle = "Consultant"
+                        },
+                        new
+                        {
+                            SkillId = new Guid("0d3243bb-fb8a-4323-a9fd-362bfe23165d"),
+                            Description = "some des.",
+                            SkillTitle = "Sikkehed"
+                        });
                 });
 
             modelBuilder.Entity("Unik_TaskManagement.Domain.Booking", b =>
@@ -211,13 +336,6 @@ namespace UnikTaskManagement.Persistence.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("Unik_TaskManagement.Domain.Opgave", b =>
-                {
-                    b.HasOne("Unik_TaskManagement.Domain.Project", null)
-                        .WithMany("Opgaver")
-                        .HasForeignKey("ProjectId");
-                });
-
             modelBuilder.Entity("Unik_TaskManagement.Domain.Project", b =>
                 {
                     b.HasOne("Unik_TaskManagement.Domain.Kunde", "Kunde")
@@ -244,11 +362,6 @@ namespace UnikTaskManagement.Persistence.Migrations
             modelBuilder.Entity("Unik_TaskManagement.Domain.Medarbejde", b =>
                 {
                     b.Navigation("Skilles");
-                });
-
-            modelBuilder.Entity("Unik_TaskManagement.Domain.Project", b =>
-                {
-                    b.Navigation("Opgaver");
                 });
 #pragma warning restore 612, 618
         }

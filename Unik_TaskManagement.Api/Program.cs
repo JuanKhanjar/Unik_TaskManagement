@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+using Unik_TaskManagement.Api.InitialMigration;
 using Unik_TaskManagement.Application;
 using Unik_TaskManagement.Persistence;
 using Unik_TaskManagement.Persistence.Data;
@@ -15,9 +17,15 @@ builder.Services.AddSwaggerGen( );
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
         builder.Configuration.GetConnectionString("MyConnectionString")
     ));
+;
+builder.Services.AddControllers( ).AddJsonOptions(x =>
+				x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>( );
 builder.Services.AddApplicationServices( );
 builder.Services.AddPersistenceServices( );
+
+
 
 var app = builder.Build( );
 
@@ -33,5 +41,7 @@ app.UseHttpsRedirection( );
 app.UseAuthorization( );
 
 app.MapControllers( );
+
+//app.MigrateDatabase( );
 
 app.Run( );

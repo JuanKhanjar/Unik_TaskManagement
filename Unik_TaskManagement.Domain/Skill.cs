@@ -9,7 +9,7 @@ namespace Unik_TaskManagement.Domain
     public class Skill
     {
         public Guid SkillId { get; set; }
-        public string? SkillTitle { get; set; }
-        public string? Description { get; set; }
+        public string SkillTitle { get; set; }
+        public string Description { get; set; }
     }
 }

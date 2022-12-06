@@ -6,10 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unik_TaskManagement.Application.Contracts.Persistence;
+using Unik_TaskManagement.Application.Features.Stamdata.Kunder.KundersDtos;
+using Unik_TaskManagement.Domain;
 
 namespace Unik_TaskManagement.Application.Features.Stamdata.Kunder.Queries.GetAll
 {
-    public class GetAllKunderQueryHandler : IRequestHandler<GetAllKunderQuery, List<GetKunderListViewModel>>
+    public class GetAllKunderQueryHandler : IRequestHandler<GetAllKunderQuery, List<KundeViewModel>>
     {
         private readonly IUnitOfWork _unitOfwork;
         private readonly IMapper _mapper;
@@ -20,10 +22,12 @@ namespace Unik_TaskManagement.Application.Features.Stamdata.Kunder.Queries.GetAl
             this._mapper = mapper;
         }
 
-        public async Task<List<GetKunderListViewModel>> Handle ( GetAllKunderQuery request, CancellationToken cancellationToken )
+        public async Task<List<KundeViewModel>> Handle ( GetAllKunderQuery request, CancellationToken cancellationToken )
         {
+            //Get all from db
             var allKunder = await _unitOfwork.Kunde.GetAllDataAsync();
-            return _mapper.Map<List<GetKunderListViewModel>>(allKunder);
+            //Then Aumap Them>> Target VM
+            return _mapper.Map<List<KundeViewModel>>(allKunder);
         }
     }
 }

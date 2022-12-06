@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unik_TaskManagement.Application.Contracts.Persistence;
+using Unik_TaskManagement.Application.Features.Stamdata.Kunder.KundersDtos;
 
 namespace Unik_TaskManagement.Application.Features.Stamdata.Kunder.Queries.GetDetails
 {
-    public class GetKundeDetailQueryHandler : IRequestHandler<GetKundeDetailQuery, GetKundeDetailViewModel>
+    public class GetKundeDetailQueryHandler : IRequestHandler<GetKundeDetailQuery, KundeViewModel>
     {
         private readonly IUnitOfWork _unitOfwork;
         private readonly IMapper _mapper;
@@ -20,11 +21,12 @@ namespace Unik_TaskManagement.Application.Features.Stamdata.Kunder.Queries.GetDe
             this._mapper = mapper;
         }
 
-        public async Task<GetKundeDetailViewModel> Handle ( GetKundeDetailQuery request, CancellationToken cancellationToken )
+        public async Task<KundeViewModel> Handle ( GetKundeDetailQuery request, CancellationToken cancellationToken )
         {
+            //Get from Db
             var Kunde = await _unitOfwork.Kunde.GetByIdAsync(k=>k.KundeId==request.KundeId);
-
-            return _mapper.Map<GetKundeDetailViewModel>(Kunde);
+            //Mapping Properties
+            return _mapper.Map<KundeViewModel>(Kunde);
         }
     }
 }

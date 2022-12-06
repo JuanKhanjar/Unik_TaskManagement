@@ -34,6 +34,7 @@ namespace Unik_TaskManagement.Persistence.Repositories
             Opgave = new OpgaveRepository(_db);
             Medarbejde = new MedarbejdeRepository(_db);
             Skill = new SkillRepository(_db);
+            Booking = new BookingRepository(_db);
 
         }
 

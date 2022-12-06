@@ -11,9 +11,21 @@ namespace Unik_TaskManagement.Application.Features.Stamdata.Kunder.Commands.Upda
 {
     public class UpdateKundeCommand: IRequest
     {
-        public Guid KundeId { get; set; }
-        public string FullName { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-    }
+		public Guid KundeId { get; set; }
+
+		[Required(AllowEmptyStrings = false, ErrorMessage = "Udfyld venligst de påkrævede felter")]
+		[Display(Name = "Fuldnavn")]
+		public string FullName { get; set; }
+
+		[Required(AllowEmptyStrings = false, ErrorMessage = "Udfyld venligst de påkrævede felter")]
+		[Display(Name = "Email Address")]
+		[DataType(DataType.EmailAddress)]
+		public string Email { get; set; }
+
+
+		[Required(AllowEmptyStrings = false, ErrorMessage = "Udfyld venligst de påkrævede felter")]
+		[Display(Name = "Tlf. Nummer")]
+		[DataType(DataType.PhoneNumber)]
+		public string Phone { get; set; }
+	}
 }

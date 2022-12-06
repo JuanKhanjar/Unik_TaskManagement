@@ -1,0 +1,23 @@
+version: '3.4'
+
+services: # mean Container
+  unik_taskmanagement.api: #Create Containe : Name
+    image: ${DOCKER_REGISTRY-}uniktaskmanagementapi # img Name
+    container_name: web_api_application
+    ports:
+      - "8000:80"
+    build:
+      context: .
+      dockerfile: Unik_TaskManagement.Api/Dockerfile
+    depends_on:
+      - sqldb
+  sqldb:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: sql_server2022
+    restart: always
+    ports:
+      - "1433:1433"
+    environment:
+      - "ACCEPT_EULA=Y"
+      - "MSSQL_PID=Express"
+      - "MSSQL_SA_PASSWORD=^JuanJad123!"

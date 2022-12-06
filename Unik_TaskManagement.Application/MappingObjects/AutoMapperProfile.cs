@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Unik_TaskManagement.Application.Features.Stamdata.Bookings.Commands.AddNew;
 using Unik_TaskManagement.Application.Features.Stamdata.Kunder.Commands.AddNew;
 using Unik_TaskManagement.Application.Features.Stamdata.Kunder.Commands.Update;
-using Unik_TaskManagement.Application.Features.Stamdata.Kunder.Queries.GetAll;
-using Unik_TaskManagement.Application.Features.Stamdata.Kunder.Queries.GetDetails;
+using Unik_TaskManagement.Application.Features.Stamdata.Kunder.KundersDtos;
+using Unik_TaskManagement.Application.Features.Stamdata.Medarbejder.Queries.GetAll;
+using Unik_TaskManagement.Application.Features.Stamdata.Opgaver.Queries.GetAll;
+using Unik_TaskManagement.Application.Features.Stamdata.Projects.Queries.GetAll;
+using Unik_TaskManagement.Application.Features.Stamdata.Projects.Queries.GetDetails;
 using Unik_TaskManagement.Domain;
 
 namespace Unik_TaskManagement.Application.MappingObjects
@@ -16,11 +15,21 @@ namespace Unik_TaskManagement.Application.MappingObjects
     {
         public AutoMapperProfile ( )
         {
+
             CreateMap<Kunde, CreateKundeCommand>( ).ReverseMap( );
-            CreateMap<Kunde, GetKunderListViewModel>( ).ReverseMap( );
-            CreateMap<Kunde, GetKundeDetailViewModel>( ).ReverseMap( );
             CreateMap<Kunde, UpdateKundeCommand>( ).ReverseMap( );
-            CreateMap<Project, ProjectsDto>( ).ReverseMap( );
-        }
+            CreateMap<Kunde, KundeViewModel>( ).ReverseMap( );
+
+			CreateMap<Project, ProjectVieModel>( ).ReverseMap( );
+			CreateMap<Project, ProjectDetailVieModel>( ).ReverseMap( );
+
+			CreateMap<Booking, CreateBookingCommand>( ).ReverseMap( );
+
+			CreateMap<Opgave, OpgaverVM>( ).ReverseMap( );
+
+			CreateMap<Medarbejde, MedarbejderVM>( ).ReverseMap( );
+			
+			//CreateMap<Project, KundeViewModel>( ).ReverseMap( );
+		}
     }
 }

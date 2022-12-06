@@ -1,0 +1,38 @@
+﻿@page
+@model Unik_TaskManagement.web.Pages.Admin.Kunder.CreateModel
+@{
+}
+<form method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary pl-3">Create Kunde</h2>
+			<hr />
+		</div>
+		<div asp-validation-summary="All"></div>
+		<div class="mb-3">
+			<label asp-for="Kunde.FullName"></label>
+			<input asp-for="Kunde.FullName" class="form-control" required />
+			<span asp-validation-for="Kunde.FullName" class="text-danger" ></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Kunde.Email"></label>
+			<input asp-for="Kunde.Email" class="form-control" required/>
+			<span asp-validation-for="Kunde.Email" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Kunde.Phone"></label>
+			<input asp-for="Kunde.Phone" class="form-control" />
+			<span asp-validation-for="Kunde.Phone" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px;">Create</button>
+		<a asp-page="Index" class="btn btn-secondary" style="width:150px;"> Back to List</a>
+
+	</div>
+
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

@@ -23,6 +23,7 @@ namespace Unik_TaskManagement.Domain
         [Required, Display(Name = "Tlf. nummer"), DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 
+
         public JobeType Job { get; set; }
         public IReadOnlyCollection<Skill>? Skilles { get; set; }
     }

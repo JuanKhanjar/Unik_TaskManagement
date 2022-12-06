@@ -12,17 +12,6 @@ namespace Unik_TaskManagement.Domain
 {
     public class Booking
     {
-        public Booking ( Guid bookId, Guid projectId,Guid opgaveId,
-             Guid medarbejdeId,DateTime startDate, DateTime endDate)
-        {
-            BookId = bookId;
-            ProjectId = projectId;
-            MedarbejdeId = medarbejdeId;
-            StartDate = startDate;
-            EndDate = endDate;
-            Duration = BusinessDaysLeft(startDate,endDate);
-        }
-
         [Key]
         public Guid BookId { get; set; }
 
@@ -38,6 +27,7 @@ namespace Unik_TaskManagement.Domain
         [ForeignKey("MedarbejdeId")]
         public Medarbejde Medarbejde { get; set; }
 
+
         [Required(ErrorMessage = "startdato er påkrævet")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
@@ -49,7 +39,19 @@ namespace Unik_TaskManagement.Domain
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [DisplayName("Slut dato")]
         public DateTime EndDate { get; set; }
-        public double Duration { get; set; }
+
+        public int Duration { get; set; }
+        //public Booking ( Guid bookId, Guid projectId, Guid opgaveId,
+        //   Guid medarbejdeId, DateTime startDate, DateTime endDate )
+        //{
+        //    BookId = bookId;
+        //    ProjectId = projectId;
+        //    OpgaveId = opgaveId;
+        //    MedarbejdeId = medarbejdeId;
+        //    StartDate = startDate;
+        //    EndDate = endDate;
+        //    Duration = BusinessDaysLeft(startDate, endDate);
+        //}
         private int BusinessDaysLeft ( DateTime first, DateTime last )
         {
             var count = 0;

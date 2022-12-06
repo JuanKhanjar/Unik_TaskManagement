@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -26,7 +27,7 @@ namespace Unik_TaskManagement.Persistence.Repositories
             await dbSet.AddAsync(entity);
         }
 
-        public async Task<List<T>> GetAllDataAsync ( Expression<Func<T, bool>>? filter = null, string? includeProperties = null )
+        public async Task<IEnumerable<T>> GetAllDataAsync ( Expression<Func<T, bool>>? filter = null, string[ ]? includeProperties = null )
         {
             IQueryable<T> query = dbSet;
             if (filter != null)
@@ -35,39 +36,32 @@ namespace Unik_TaskManagement.Persistence.Repositories
             }
             if (includeProperties != null)
             {
-                //abc,,xyz -> abc xyz
-                foreach (var includeProperty in includeProperties.Split(
-                    new char[ ] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    query = query.Include(includeProperty);
-                }
-            }
+				foreach (var include in includeProperties)
+					query = query.Include(include);
+			}
 
             return await query.ToListAsync( );
-        }
-
-        public async Task<T> GetByIdAsync ( Expression<Func<T, bool>>? filter = null, string? includeProperties = null )
-        {
-            IQueryable<T> query = dbSet;
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-            if (includeProperties != null)
-            {
-                //abc,,xyz -> abc xyz
-                foreach (var includeProperty in includeProperties.Split(
-                    new char[ ] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    query = query.Include(includeProperty);
-                }
-            }
-            return await query.FirstOrDefaultAsync( );
         }
 
         public void Delete ( T entity )
         {
             dbSet.Remove(entity);
         }
-    }
+
+		public async Task<T> GetByIdAsync (Expression<Func<T, bool>> filter , string? includeProperties = null )
+		{
+			IQueryable<T> query = dbSet;
+
+			if (includeProperties != null)
+			{
+				//abc,,xyz -> abc xyz
+				foreach (var includeProperty in includeProperties.Split(
+					new char[ ] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+				{
+                    query = query.Include(includeProperty);
+				}
+			}
+            return await query.FirstOrDefaultAsync(filter);
+		}
+	}
 }

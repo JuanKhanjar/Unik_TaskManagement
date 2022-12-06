@@ -1,16 +1,30 @@
 ﻿using MediatR;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using Unik_TaskManagement.Application.Features.Stamdata.Kunder.KundersDtos;
 
 namespace Unik_TaskManagement.Application.Features.Stamdata.Kunder.Commands.AddNew
 {
     public class CreateKundeCommand: IRequest<Guid>
     {
-        public string FullName { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-    }
+		[Required(AllowEmptyStrings = false, ErrorMessage = "Udfyld venligst de påkrævede felter")]
+		[Display(Name = "Fuldnavn")]
+		public string FullName { get; set; }
+
+		[Required(AllowEmptyStrings = false, ErrorMessage = "Udfyld venligst de påkrævede felter")]
+		[Display(Name = "Email Address")]
+		[DataType(DataType.EmailAddress)]
+		public string Email { get; set; }
+
+
+		[Required(AllowEmptyStrings = false, ErrorMessage = "Udfyld venligst de påkrævede felter")]
+		[Display(Name = "Tlf. Nummer")]
+		[DataType(DataType.PhoneNumber)]
+		public string Phone { get; set; }
+	}
 }
